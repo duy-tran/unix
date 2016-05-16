@@ -1,0 +1,11 @@
+#!/bin/sh
+
+hello(){
+  echo "Hello" $1
+}
+
+echo "Testing function"
+hello Duy
+echo "Testing done"
+
+exit 0

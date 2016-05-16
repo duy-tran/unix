@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "Enter password"
+read trythis
+
+while [ "$trythis" != "secret" ]; do
+  echo -n "Sorry, try again: "
+  read trythis
+done
+echo "You win!"
+exit 0

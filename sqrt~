@@ -1,0 +1,5 @@
+#!/bin/sh
+y=8
+x=$(echo "sqrt($y)" | bc)
+printf "x= %f \n",$x
+

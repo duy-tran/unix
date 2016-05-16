@@ -1,0 +1,19 @@
+#!/bin/sh
+
+sample_text="Global variable"
+
+foo(){
+ local sample_text="Local variable"
+ echo "Inside function"
+ echo $sample_text \n
+}
+
+echo "script starting"
+echo $sample_text \n
+
+foo
+
+echo "script ended"
+echo $sample_text \n
+
+exit 0

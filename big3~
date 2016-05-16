@@ -1,0 +1,10 @@
+#!/bin/sh
+
+max=$1
+for var in $2 $3
+do
+ if [ "$var" -gt "$max" ]
+ then max="$var"
+ fi
+done
+echo Max = $max

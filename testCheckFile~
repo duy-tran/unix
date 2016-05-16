@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f $1 ]
+then
+  echo "file $1 exists"
+else
+then
+  echo "file $1 doesn't exist"
+fi
+

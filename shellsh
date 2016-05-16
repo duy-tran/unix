@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ ! -d ./html ]
+then
+  echo No html folder found, creating html folder
+  mkdir html
+fi
+for var in `find . -name "$1.html" -print`
+do
+ cp $var ./html
+done
+
+#find . -name "index.html" -exec cp {} ./html \;

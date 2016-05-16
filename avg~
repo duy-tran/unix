@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]
+then
+  exit 1
+fi
+
+sum=0
+for var in "$@"; do sum=$(($sum+$var)); done
+echo $(awk "BEGIN {printf \"Average = %.2f\",$sum/$#}")

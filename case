@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo -n "Enter your language: "
+read language
+
+case "$language" in
+    english | anglais ) echo "Hello";;
+    french | francais ) echo "Bonjour";;
+    vietnamese | vietnamien ) echo "Xin chao\`";;
+    *) echo "Sorry I don't know that language";;
+esac

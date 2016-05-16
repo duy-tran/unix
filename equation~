@@ -1,0 +1,34 @@
+#!/bin/bash
+if [ "$1" -eq 0 ]
+then 
+  if [ "$2" -eq 0 ]
+  then
+    if [ "$3" -eq 0 ]
+    then
+      echo "Infinity root"
+    else
+      echo "No root"
+    fi
+  else
+    echo -n "x = "
+    echo "scale=2;-(($3/$2))" | bc
+    #echo $(awk "BEGIN {printf \"x = %.2f\",-(($3/$2))}")
+  fi
+else
+  delta=$(($2*$2-4*$1*$3))
+  if [ "$delta" -eq 0 ]
+  then
+    echo -n "x = "
+    echo "scale=2;-(($2/($1*2)))" | bc
+    #echo $(awk "BEGIN {printf \"x = %.2f\",-(($2/($1*2)))}")
+  elif [ "$delta" -lt 0 ]
+  then
+    echo "No root"
+  else
+    echo -n "x1 = "
+    echo "scale=2;(((-($2)+sqrt($delta))/($1*2)))" | bc
+    #echo $(awk "BEGIN {printf \"x1 = %.2f\",(((-($2)+sqrt($delta))/($1*2)))}")
+    echo -n "x2 = "
+    echo "scale=2;(((-($2)-sqrt($delta))/($1*2)))" | bc	
+  fi
+fi

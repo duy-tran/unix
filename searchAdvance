@@ -1,0 +1,95 @@
+#!/bin/bash
+checkLoop=1
+copyDest=./copy
+declare -A map
+while [ "$checkLoop" -eq 1 ]
+do
+  checkConflict=0
+  #Invalid folder
+  while true
+  do
+    echo -n "Input folder: "
+    read folderName
+    if [ -d "$folderName" ]
+    then
+      break
+    else
+      echo "Folder invalid"
+    fi
+  done
+
+  #Empty filename
+  while true
+  do
+    echo -n "Input file name: "
+    read fileName
+    if [ "$fileName" == "" ]
+    then 
+      echo "Filename invalid"
+    else
+      break
+    fi
+  done
+
+  #Start looping
+  for var in `find "$folderName" -name "$fileName" -print`
+  do
+    echo -n "Found file $var, "
+    fileName=$(basename "$var")
+    if [ -f $copyDest/$fileName ]
+    then
+      #Check if the name contain filetype
+      if [[ "$fileName" == *.* ]]
+      then
+        namePart=${fileName%.*}
+        typePart="."
+        typePart+=${fileName##*.}
+      else
+        namePart=$fileName
+        typePart=""
+      fi
+      #Start finding the number of the same file
+      if [ "$checkConflict" -eq 0 ]
+      then
+        order=0
+        maxOrder=0
+        for sameFile in `find "$copyDest" -name "*$namePart[*" -print`
+        do
+          order=${sameFile##*[}
+          order=${order%]*}
+          if [ "$order" -gt "$maxOrder" ]
+          then
+            maxOrder=$order
+          fi
+        done
+        checkConflict=1
+        echo -n "$copyDest/$fileName already exists, current max order is $maxOrder, "
+        map["$fileName"]=$(($maxOrder+1))
+      else
+        map["$fileName"]=$((${map["$fileName"]}+1))
+      fi
+      echo "copying to $copyDest/$namePart[${map["$fileName"]}]$typePart"
+      cp $var $copyDest/$namePart[${map["$fileName"]}]$typePart
+    else #file in the destination dir doesn't exist (yet)
+      map["$fileName"]=0
+      echo "copying to $copyDest/$fileName"
+      cp $var $copyDest
+    fi
+  done
+  #Continue?
+  while true
+  do
+    echo -n "Do you want to continue? "
+    read inputString
+    if [ "${inputString,,}" == "yes" ] || [ "${inputString,,}" == "y" ] || [ "${inputString,,}" == "oui" ]
+    then
+      break
+    elif [ "${inputString,,}" == "no" ] || [ "${inputString,,}" == "n" ] || [ "${inputString,,}" == "non" ]
+    then
+      checkLoop=0
+      break
+    else
+      echo "Please input a valid answer (Yes/No/Y/N/Oui/Non)"
+    fi
+  done
+done

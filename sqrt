@@ -1,0 +1,4 @@
+#!/bin/sh
+y=8
+x=$(echo "scale=3;sqrt($y)" | bc)
+echo $x

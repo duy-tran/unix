@@ -1,0 +1,25 @@
+#!/bin/bash
+check=1
+copyDest=./copy
+declare -A map
+while [ "$check" -eq 1 ]
+do
+ echo -n "Input folder: "
+ read folderName
+ echo -n "Input file name: "
+ read fileName
+ for var in `find "$folderName" -name "$fileName" -print`
+ do
+  fileName=$(basename "$var")
+  if [ -f $copyDest/$fileName ]
+  then
+   map["$fileName"]=$((${map["$fileName"]}+1))
+   cp $var $copyDest/$fileName[${map["$fileName"]}]
+  else
+   map["$fileName"]=0
+   cp $var $copyDest
+  fi
+ done
+ echo -n "Do you want to continue? (Y=1;N=0) "
+ read check
+done

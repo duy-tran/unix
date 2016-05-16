@@ -1,0 +1,10 @@
+echo Input your first name:
+read firstName
+
+echo Input your middle name:
+read middleName
+
+echo Input your last name:
+read lastName
+
+echo Hello, $lastName $middleName $firstName !

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Your family name is "$1
+echo "Your middle name is "$2
+echo "Your first name is "$3

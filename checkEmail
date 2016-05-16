@@ -1,0 +1,30 @@
+#!/bin/bash
+checkLoop=1
+while [ "$checkLoop" -eq 1 ]
+do
+  echo -n -e "\e[0mInput email: \e[93m"
+  read email
+  if [[ "$email" =~ ^[[:alpha:]]+([_\.]?[[:alnum:]]+){3,}@([[:alnum:]]+\.)+([[:alpha:]]{2,}){1}$ ]]
+  then
+    echo -e "\e[0m\e[1m\e[7mVALID EMAIL ADDRESS\e[0m"
+  else
+    echo -e "\e[31m\e[1m\e[7mINVALID EMAIL ADDRESS\e[0m"
+  fi
+  #Continue?
+  while true
+  do
+    echo -e -n "Do you want to continue? "
+    read inputString
+    if [ "${inputString,,}" == "yes" ] || [ "${inputString,,}" == "y" ] || [ "${inputString,,}" == "oui" ]
+    then
+      break
+    elif [ "${inputString,,}" == "no" ] || [ "${inputString,,}" == "n" ] || [ "${inputString,,}" == "non" ]
+    then
+      echo -e "                                    \e[7m\e[34mAU \e[97mREV\e[91mOIR"
+      checkLoop=0
+      break
+    else
+      echo -e "\e[31mPlease input a valid answer (Yes/No/Y/N/Oui/Non)\e[0m"
+    fi
+  done
+done

@@ -10,7 +10,7 @@
 	
 #define BUFSIZE 2000
 #define SIZE 20
-#define ANSI_COLOR_RED     "\x1b[7;31m"
+#define ANSI_COLOR_RED     "\x1b[7;91m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
 #define ANSI_COLOR_BLUE    "\x1b[34m"

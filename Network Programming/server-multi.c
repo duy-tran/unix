@@ -10,7 +10,7 @@ void doprocessing (int sock);
 
 int main( int argc, char *argv[] ) {
    int sockfd, newsockfd, portno, clilen;
-   char buffer[256];
+   char buffer[256], buffer_server[256];
    struct sockaddr_in serv_addr, cli_addr;
    int n, pid;
    
@@ -24,7 +24,7 @@ int main( int argc, char *argv[] ) {
    
    /* Initialize socket structure */
    bzero((char *) &serv_addr, sizeof(serv_addr));
-   portno = 5002;
+   portno = 5001;
    
    serv_addr.sin_family = AF_INET;
    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");;//INADDR_ANY;
@@ -71,6 +71,8 @@ int main( int argc, char *argv[] ) {
       }
 		
    } /* end of while */
+
+
 }
 
 void doprocessing (int sock) {
@@ -84,8 +86,8 @@ void doprocessing (int sock) {
       exit(1);
    }
    
-   printf("Here is the message: %s\n",buffer);
-   n = write(sock,"I got your message",18);
+   printf("Client: %s\n",buffer);
+   n = write(sock,buffer,18);
    
    if (n < 0) {
       perror("ERROR writing to socket");

@@ -10,7 +10,7 @@
 	
 #define BUFSIZE 2000
 #define SIZE 20
-#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_RED     "\x1b[7;31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
 #define ANSI_COLOR_BLUE    "\x1b[34m"
@@ -107,7 +107,7 @@ void send_recv(int i, int sockfd, char *c_name)
             strcpy(msg, ANSI_COLOR_RED);
             strcat(msg,c_name);
 			strcat(msg,": ");
-			strcat(msg,ANSI_COLOR_YELLOW);
+			strcat(msg,ANSI_COLOR_CYAN);
 			strcat(msg,&send_buf);
 			strcat(msg,ANSI_COLOR_RESET);
 			send(sockfd, msg, strlen(msg), 0);
@@ -130,6 +130,10 @@ int main(int argc, char *argv[])
 	printf("%s started\n", c_name);
 	connectto_server(&sockfd, &server_addr, &my_addr, s_port, c_port, ip);
 	set_clear(sockfd, &read_fds, &master);
+    //char msg_init[SIZE];
+    //strcpy(msg_init,c_name);
+    //strcat(msg_init," vừa vào emmei !\n");
+    //send(sockfd, msg_init, strlen(msg_init), 0);
 	send(sockfd, c_name, strlen(c_name), 0);
 	fdmax = sockfd;
 	while(1){

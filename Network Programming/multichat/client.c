@@ -104,7 +104,7 @@ void send_recv(int i, int sockfd, char *c_name)
 			exit(0);
 		}else
 			//send(sockfd, send_buf, strlen(send_buf), 0);
-            strcpy(ANSI_COLOR_RED);
+            strcpy(msg, ANSI_COLOR_RED);
             strcat(msg,c_name);
 			strcat(msg,": ");
 			strcat(msg,ANSI_COLOR_YELLOW);

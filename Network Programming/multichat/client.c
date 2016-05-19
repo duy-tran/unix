@@ -104,9 +104,10 @@ void send_recv(int i, int sockfd, char *c_name)
 			exit(0);
 		}else
 			//send(sockfd, send_buf, strlen(send_buf), 0);
-			strcpy(msg,c_name);
-			strcat(msg," nói rằng ");
-			strcat(msg,ANSI_COLOR_CYAN);
+            strcpy(ANSI_COLOR_RED);
+            strcat(msg,c_name);
+			strcat(msg,": ");
+			strcat(msg,ANSI_COLOR_YELLOW);
 			strcat(msg,&send_buf);
 			strcat(msg,ANSI_COLOR_RESET);
 			send(sockfd, msg, strlen(msg), 0);
